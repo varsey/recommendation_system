@@ -9,8 +9,7 @@ raw_dataset_df = pd.read_csv('movie_ratings_data_set.csv')
 # Convert the running list of user ratings into a matrix
 ratings_df = pd.pivot_table(raw_dataset_df, index='user_id', columns='movie_id', aggfunc=np.max)
 
-# Normalize the ratings (center them around their mean)
-normalized_ratings, means = matrix_factorization_utilities.normalize_ratings(ratings_df.as_matrix())
+normalized_ratings, means = matrix_factorization_utilities.normalize_ratings(ratings_df.values)
 
 # Apply matrix factorization to find the latent features
 U, M = matrix_factorization_utilities.low_rank_matrix_factorization(normalized_ratings,
